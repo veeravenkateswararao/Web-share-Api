@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web share Api</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #btn{
+            background-color: green;
+            width: 150px;
+            color: white;
+            font-size: 20px;
+                }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="file" id="media">
+    </div>
+    <button id="btn">share</button>
+    <script>
+
+        // we create by using local files
+        // let Image=document.getElementById("media")
+        let btn=document.getElementById("btn")
+        // btn.addEventListener('click',function(){
+        //     let file=Image.files
+        // if(navigator.share){
+        //     navigator.share({
+        //         title:"venky",
+        //         text:"This is share task",
+        //         url:"https://www.youtube.com/watch?v=h9LWISNquSM&t=272s",
+        //         files:file
+        //     })
+        // }
+        // })
+        
+        // create api share file by using online api
+        btn.addEventListener('click',async ()=>{
+          let img=await fetch("https://images.pexels.com/photos/13659272/pexels-photo-13659272.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load");
+          let file=await img.blob();
+          file=new File([file],'food.jpg',{type:'image/jpeg'});
+          if(navigator.share){
+            navigator.share({
+                title:"venky",
+                text:" this is the link",
+                url:"https://www.youtube.com/watch?v=h9LWISNquSM&t=272s",
+                files:[file]
+            })
+          }
+
+        })
+
+    </script>
+    
+</body>
+</html>
